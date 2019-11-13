@@ -10,7 +10,7 @@ import argparse
 import torch
 import torch.backends.cudnn as cudnn
 import numpy as np
-from data import cfg
+from data.config import cfg_mnet as cfg
 from layers.functions.prior_box import PriorBox
 from utils.nms.py_cpu_nms import py_cpu_nms
 import cv2
@@ -59,7 +59,7 @@ def load_model(model, pretrained_path, load_to_cpu):
 
 torch.set_grad_enabled(False)
 # net and model
-net = RetinaFace(phase="test")
+net = RetinaFace(cfg=cfg, phase="test")
 net = load_model(net, 'weights/Final_Retinaface.pth', False)
 net.eval()
 print('Finished loading model!')

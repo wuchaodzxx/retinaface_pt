@@ -90,8 +90,8 @@ logging.info('onnxruntime supported devices: {}'.format(onnxruntime.get_device()
 session = onnxruntime.InferenceSession('retinaface_mbv2_sim.onnx')
 logging.info('onnx session loaded.')
 
-# data_f = 'images/0--Parade_0_Parade_marchingband_1_657.jpg'
-data_f = '/media/fagangjin/wd/permanent/datasets/TestVideos/ellenshow.mp4'
+data_f = 'images/0--Parade_0_Parade_marchingband_1_657.jpg'
+# data_f = '/media/fagangjin/wd/permanent/datasets/TestVideos/ellenshow.mp4'
 if os.path.basename(data_f).split('.')[-1] == 'mp4':
     cap = cv2.VideoCapture(data_f)
     while(cap.isOpened()):
