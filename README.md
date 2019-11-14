@@ -16,6 +16,14 @@ Some todos here:
 
 
 
+
+**note**: This is 1.0 branch, this branch contains models that trained with previous model architecture and can be inference via model we uploaded to repo at `weights/Final_Retinaface.pth`.  You can directly run `python3 demo_img_folder.py` to show the result.
+
+If you want see our exprimental result on using Resnet50 or DetNas backbone model, pls checkout master branch.
+
+
+
+
 ## Updates
 
 - **2019.11.01**: 250fps TensorRT inference on retinaface has been opensource!! checkout on our platform: http://manaai.cn
