@@ -5,9 +5,14 @@ import torchvision.models._utils as _utils
 import torch.nn.functional as F
 from collections import OrderedDict
 import os
-from models.net import MobileNetV1 as MobileNetV1
-from models.net import FPN as FPN
-from models.net import SSH as SSH
+# from models.net import MobileNetV1 as MobileNetV1
+# from models.net import FPN as FPN
+# from models.net import SSH as SSH
+
+from models.mobilev1 import MobileNetV1
+from models.mobilev1 import FPN as FPN
+from models.mobilev1 import SSH as SSH
+
 from models.detnas import ShuffleNetV2DetNAS
 
 
@@ -20,8 +25,8 @@ class ClassHead(nn.Module):
     def forward(self,x):
         out = self.conv1x1(x)
         out = out.permute(0,2,3,1).contiguous()
-        
-        return out.view(out.shape[0], -1, 2)
+        # return out.view(out.shape[0], -1, 2)
+        return out.view(1, -1, 2)
 
 class BboxHead(nn.Module):
     def __init__(self,inchannels=512,num_anchors=3):
@@ -31,8 +36,8 @@ class BboxHead(nn.Module):
     def forward(self,x):
         out = self.conv1x1(x)
         out = out.permute(0,2,3,1).contiguous()
-
-        return out.view(out.shape[0], -1, 4)
+        # return out.view(out.shape[0], -1, 4)
+        return out.view(1, -1, 4)
 
 class LandmarkHead(nn.Module):
     def __init__(self,inchannels=512,num_anchors=3):
@@ -42,8 +47,8 @@ class LandmarkHead(nn.Module):
     def forward(self,x):
         out = self.conv1x1(x)
         out = out.permute(0,2,3,1).contiguous()
-
-        return out.view(out.shape[0], -1, 10)
+        # return out.view(out.shape[0], -1, 10)
+        return out.view(1, -1, 10)
 
 class RetinaFace(nn.Module):
     def __init__(self, cfg = None, phase = 'train'):

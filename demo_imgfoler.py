@@ -10,6 +10,7 @@ from layers.functions.prior_box import PriorBox
 from utils.nms.py_cpu_nms import py_cpu_nms
 import cv2
 from models.retinaface import RetinaFace
+# from models_bk.retinaface import RetinaFace
 from utils.box_utils import decode
 from alfred.utils.log import logger as logging
 from alfred.dl.torch.common import device
@@ -79,6 +80,7 @@ if __name__ == '__main__':
     torch.set_grad_enabled(False)
     # net and model
     net = RetinaFace(cfg=cfg, phase='test')
+    # net = RetinaFace(phase='test')
     net = load_model(net, args.trained_model)
     net.eval()
     print('Finished loading model!')
