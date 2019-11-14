@@ -5,11 +5,12 @@ import argparse
 import torch
 import torch.backends.cudnn as cudnn
 import numpy as np
-from data import cfg
+from data.config import cfg_mnet as cfg
 from layers.functions.prior_box import PriorBox
 from utils.nms.py_cpu_nms import py_cpu_nms
 import cv2
 from models.retinaface import RetinaFace
+# from models_bk.retinaface import RetinaFace
 from utils.box_utils import decode
 from alfred.utils.log import logger as logging
 from alfred.dl.torch.common import device
@@ -78,7 +79,8 @@ def load_model(model, pretrained_path):
 if __name__ == '__main__':
     torch.set_grad_enabled(False)
     # net and model
-    net = RetinaFace(phase='test')
+    net = RetinaFace(cfg=cfg, phase='test')
+    # net = RetinaFace(phase='test')
     net = load_model(net, args.trained_model)
     net.eval()
     print('Finished loading model!')
@@ -118,14 +120,18 @@ if __name__ == '__main__':
         img = img.transpose(2, 0, 1)
         img = torch.from_numpy(img).unsqueeze(0)
         img = img.to(device)
+        # print(img)
         scale = scale.to(device)
 
-        print('input tensor shape: {}'.format(img.size()))
+        # print('input tensor shape: {}'.format(img.size()))
         tic = time.time()
         loc, conf, landms = net(img)  # forward pass
         print('net forward time: {:.4f}'.format(time.time() - tic))
         priorbox = PriorBox(cfg, image_size=(im_height, im_width))
         priors = priorbox.forward()
+        print('priors: ', priors[:5])
+        print('priors: ', priors[-5:])
+        print(priors.shape)
         priors = priors.to(device)
         prior_data = priors.data
         boxes = decode(loc.data.squeeze(0), prior_data, cfg['variance'])
