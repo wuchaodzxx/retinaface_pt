@@ -20,8 +20,8 @@ class ClassHead(nn.Module):
     def forward(self,x):
         out = self.conv1x1(x)
         out = out.permute(0,2,3,1).contiguous()
-        
-        return out.view(out.shape[0], -1, 2)
+        # return out.view(out.shape[0], -1, 2)
+        return out.view(1, -1, 2)
 
 class BboxHead(nn.Module):
     def __init__(self,inchannels=512,num_anchors=3):
@@ -31,8 +31,8 @@ class BboxHead(nn.Module):
     def forward(self,x):
         out = self.conv1x1(x)
         out = out.permute(0,2,3,1).contiguous()
-
-        return out.view(out.shape[0], -1, 4)
+        # return out.view(out.shape[0], -1, 4)
+        return out.view(1, -1, 4)
 
 class LandmarkHead(nn.Module):
     def __init__(self,inchannels=512,num_anchors=3):
@@ -42,8 +42,8 @@ class LandmarkHead(nn.Module):
     def forward(self,x):
         out = self.conv1x1(x)
         out = out.permute(0,2,3,1).contiguous()
-
-        return out.view(out.shape[0], -1, 10)
+        # return out.view(out.shape[0], -1, 10)
+        return out.view(1, -1, 10)
 
 class RetinaFace(nn.Module):
     def __init__(self, cfg = None, phase = 'train'):

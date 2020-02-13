@@ -16,8 +16,15 @@ Some todos here:
 
 
 
+
+**note**: This is master branch, models you download previously may be suitable for this branch, if you want model and out-of-box inference, pls checkout `1.0` branch.
+
+
+
+
 ## Updates
 
+- **2019.11.15**: Keep updating, we are adding Resnet50 and DetNas, pretrained model are training, will update model when trained;
 - **2019.11.01**: 250fps TensorRT inference on retinaface has been opensource!! checkout on our platform: http://manaai.cn
 - **2019.09.23**: Now we add a standalone onnxruntime inference demo! You can using onnxruntime-gpu or onnxruntime to do inference on our onnx model. It runs about 40ms on CPU!!! Amazing fast! With acceleration of GPU, it would got massive speed enhancement!
 
